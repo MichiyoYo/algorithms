@@ -1,3 +1,5 @@
+//Write a function called productOfArray which takes in an array of numbers and returns the product of them all
+
 //short version with divide et impera
 function productOfArray(arr) {
   if (arr.length < 1) return 0;
