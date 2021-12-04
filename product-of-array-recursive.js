@@ -19,3 +19,10 @@ function productOfArray(arr) {
   let right = productOfArray(arr.slice(midIndex));
   return left * right;
 }
+
+//alterative solution
+
+function productOfArrayAlt(arr) {
+  if (arr.length === 0) return 1;
+  return arr[0] * productOfArray(arr.slice(1));
+}
