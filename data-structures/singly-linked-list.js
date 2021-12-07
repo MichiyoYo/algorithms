@@ -38,6 +38,10 @@ class SinglyLinkedList {
     return this;
   }
 
+  /**
+   * Removes the last node of the list
+   * @returns the removed node
+   */
   pop() {
     if (!this.head) return undefined;
     let current = this.head;
@@ -55,6 +59,19 @@ class SinglyLinkedList {
       this.tail = null;
     }
     return removedNode;
+  }
+
+  /**
+   * Removes an element from the head of the list
+   * @returns the removed node
+   */
+  shift() {
+    if (!this.head) return undefined;
+    let oldHead = this.head;
+    this.head = this.head.next;
+    this.length--;
+    if (this.length === 0) this.tail = null;
+    return oldHead;
   }
 }
 
