@@ -1,42 +1,55 @@
-function Stack() {
-  //keeps track of the number of elements in the stack
-  this.count = 0;
-  //keeps track of the data
-  this.storage = {};
+class Node {
+  constructor(val) {
+    this.value = val;
+    this.next = null;
+  }
+}
+
+class Stack {
+  constructor() {
+    this.first = null;
+    this.last = null;
+    this.size = 0;
+  }
 
   /**
-   * Add the element at the end of the stack
-   * @param {*} el
+   * Adds a new node at the BEGINNING of the stack for constant time complexity
+   * @param {*} val
+   * @returns the size of the updated array
    */
-  this.push = (el) => {
-    this.storage[this.count] = el;
-    this.count++;
-  };
+  push(val) {
+    //create new node
+    let newNode = new Node(val);
+    //empty stack?
+    if (size === 0) {
+      this.first = newNode;
+      this.last = newNode;
+    } else {
+      //non empty stack, then add  to the beginning
+      const temp = this.first;
+      this.first = newNode;
+      this.first.next = temp;
+    }
+    this.size++;
+    return this.size;
+  }
 
   /**
-   * Removes and returns the element at the end of the stack
+   * Removes a node from the BEGINNING of the stack
    */
-  this.pop = () => {
-    if (this.count === 0) return undefined;
-    let item = this.storage[this.count];
-    delete this.storage[this.count];
-    this.count--;
-    return item;
-  };
+  pop() {
+    if (size === 0) return null;
 
-  /**
-   * Returns the size of the stack
-   * @returns the size of the stack
-   */
-  this.size = () => {
-    return this.count;
-  };
+    let temp = this.first;
 
-  /**
-   * Returns the last element in the stack
-   * @returns the element at the end of the stack
-   */
-  this.peek = () => {
-    return this.storage[this.count - 1];
-  };
+    if (size === 1) {
+      this.first = null;
+      this.last = null;
+    } else {
+      this.first = this.first.next;
+    }
+
+    this.size--;
+    return temp.value;
+  }
 }
