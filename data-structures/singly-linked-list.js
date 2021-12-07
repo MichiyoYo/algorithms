@@ -12,6 +12,19 @@ class SinglyLinkedList {
     this.length = 0;
   }
 
+  traverse() {
+    let current = this.head;
+    while (current) {
+      console.log(current.value);
+      current = current.next;
+    }
+  }
+
+  /**
+   * Adds a new node to the list
+   * @param {*} val the value of the node
+   * @returns the updated list
+   */
   push(val) {
     let newNode = new Node(val);
     if (!this.head) {
@@ -24,6 +37,33 @@ class SinglyLinkedList {
     this.length++;
     return this;
   }
+
+  pop() {
+    if (!this.head) return undefined;
+    let current = this.head;
+    let prev = null;
+    while (current.next) {
+      prev = current;
+      current = current.next;
+    }
+    let removedNode = prev.next;
+    prev.next = null;
+    this.tail = prev;
+    this.length--;
+    if (this.length === 0) {
+      this.head = null;
+      this.tail = null;
+    }
+    return removedNode;
+  }
 }
 
-let myList2 = new SinglyLinkedList();
+let myList3 = new SinglyLinkedList();
+myList3.push(1);
+myList3.push(2);
+myList3.push(3);
+myList3.push(4);
+
+console.log(myList3);
+
+myList3.pop();
