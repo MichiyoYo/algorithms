@@ -106,4 +106,19 @@ class SinglyLinkedList {
     }
     return currNode;
   }
+
+  /**
+   * Updates the value of the node at the index passed as first argument
+   * @param {*} index the index of the node to update
+   * @param {*} value the new value
+   * @returns true if the node was updated, false if the node wasn't found
+   */
+  set(index, value) {
+    let nodeToUpdate = this.get(index);
+    if (nodeToUpdate) {
+      nodeToUpdate.val = value;
+      return true;
+    }
+    return false;
+  }
 }
