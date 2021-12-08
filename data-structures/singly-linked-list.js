@@ -90,14 +90,20 @@ class SinglyLinkedList {
     this.length++;
     return this;
   }
+
+  /**
+   * Retrieves a node in position index
+   * @param {*} index the position of the node we want to get
+   * @returns the node at that specified index
+   */
+  get(index) {
+    if (index < 0 || index >= this.length) return null;
+    let currNode = this.head;
+    let i = 0;
+    while (currNode.next && i !== index) {
+      i++;
+      currNode = currNode.next;
+    }
+    return currNode;
+  }
 }
-
-let myList3 = new SinglyLinkedList();
-myList3.push(1);
-myList3.push(2);
-myList3.push(3);
-myList3.push(4);
-
-console.log(myList3);
-
-myList3.pop();
