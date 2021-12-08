@@ -121,4 +121,28 @@ class SinglyLinkedList {
     }
     return false;
   }
+
+  /**
+   * Adds a node to the the list at the specified index
+   * @param {*} index the index where the new node should go
+   * @param {*} value the new value
+   * @returns the added node
+   */
+  insert(index, value) {
+    if (index < 0 || index > this.length) return false;
+    //if index is referring to the end of the list, add at the end
+    if (index === this.length) return !!this.push(value);
+    //if index is referring to the beginning of the list, add to the beginning
+    if (index === 0) return !!this.unshift(value);
+
+    //if index is not at the beginning or end
+    const newNode = new Node(value);
+    var prev = this.get(index - 1); //🔥
+    var temp = prev.next;
+    prev.next = newNode;
+    newNode.next = temp;
+    this.length++;
+
+    return true;
+  }
 }
