@@ -69,4 +69,23 @@ class DoublyLinkedList {
     }
     console.log(arr);
   }
+
+  /**
+   * Removes the first node of the list
+   * @returns the removed node
+   */
+  shift() {
+    if (this.length === 0) return undefined;
+    if (this.length === 1) {
+      this.head = null;
+      this.tail = null;
+    } else {
+      let removedNode = this.head;
+      this.head = removedNode.next;
+      removedNode.next = null;
+      this.head.prev = null;
+    }
+    this.length--;
+    return removedNode;
+  }
 }
