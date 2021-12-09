@@ -36,4 +36,37 @@ class DoublyLinkedList {
     //return
     return this;
   }
+
+  /**
+   * It removes the last element of the list
+   * @returns the popped node
+   */
+  pop() {
+    if (!this.head) return undefined;
+    let oldTail = this.tail;
+    if (this.length === 1) {
+      this.head = null;
+      this.tail = null;
+    } else {
+      this.tail = this.tail.prev;
+      this.tail.next = null;
+      oldTail.prev = null;
+    }
+
+    this.length--;
+    return oldTail;
+  }
+
+  /**
+   * Prints out the values in the list as an array
+   */
+  print() {
+    let arr = [];
+    let curr = this.head;
+    for (let i = 0; i < this.length; i++) {
+      arr.push(curr.value);
+      curr = curr.next;
+    }
+    console.log(arr);
+  }
 }
