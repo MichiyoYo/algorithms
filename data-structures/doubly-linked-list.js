@@ -116,7 +116,7 @@ class DoublyLinkedList {
    * @returns the node at the specified index
    */
   get(index) {
-    if (index < 0 || index > this.length) return undefined;
+    if (index < 0 || index >= this.length) return undefined;
     let mid = Math.floor(this.length / 2) - 1;
     let currentNode = null;
     if (index <= mid) {
@@ -132,7 +132,22 @@ class DoublyLinkedList {
         currentNode = currentNode.prev;
       }
     }
-
     return currentNode;
+  }
+
+  /**
+   * Sets the node value at the specified index
+   * @param {*} index the index of the node
+   * @param {*} val the new value
+   * @returns true if successful, false otherwise
+   */
+  set(index, val) {
+    if (index < 0 || index >= this.length) return false;
+    let toUpdate = this.get(index);
+    if (toUpdate) {
+      toUpdate.value = val;
+      return true;
+    }
+    return false;
   }
 }
