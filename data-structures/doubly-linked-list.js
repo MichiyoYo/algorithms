@@ -88,4 +88,25 @@ class DoublyLinkedList {
     this.length--;
     return removedNode;
   }
+
+  /**
+   * Adds a new node at the beginning of the list
+   * @param {*} val the value of the node to add
+   * @returns the updated list
+   */
+  unshift(val) {
+    let newNode = new Node(val);
+    if (this.length === 0) {
+      this.head = newNode;
+      this.tail = newNode;
+    } else {
+      let oldHead = this.head;
+      this.head = newNode;
+      newNode.next = oldHead;
+      oldHead.prev = newNode;
+    }
+
+    this.length++;
+    return this;
+  }
 }
