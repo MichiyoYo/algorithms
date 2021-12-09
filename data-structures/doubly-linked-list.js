@@ -109,4 +109,30 @@ class DoublyLinkedList {
     this.length++;
     return this;
   }
+
+  /**
+   * Retrives the value of the node at the specified index
+   * @param {*} index the index of the node to get
+   * @returns the node at the specified index
+   */
+  get(index) {
+    if (index < 0 || index > this.length) return undefined;
+    let mid = Math.floor(this.length / 2) - 1;
+    let currentNode = null;
+    if (index <= mid) {
+      //start from right
+      currentNode = this.head;
+      for (let i = 0; i < index; i++) {
+        currentNode = currentNode.next;
+      }
+    } else {
+      //start from left
+      currentNode = this.tail;
+      for (let i = this.length - 1; i > index; i--) {
+        currentNode = currentNode.prev;
+      }
+    }
+
+    return currentNode;
+  }
 }
