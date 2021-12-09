@@ -145,4 +145,58 @@ class SinglyLinkedList {
 
     return true;
   }
+
+  /**
+   * Removed the node at the specified index
+   * @param {*} index
+   * @returns the removed node
+   */
+  remove(index) {
+    if (index < 0 || index > this.length) return null;
+    //remove from head
+    if (index === 0) return this.shift();
+    //remove from end
+    if (index === this.length) return this.pop();
+
+    var prev = this.get(index - 1);
+    var removedNode = prev.next;
+    prev.next = removedNode.next;
+
+    this.length--;
+    return removedNode;
+  }
+
+  /**
+   * Prints the list as an array
+   */
+  print() {
+    var arr = [];
+    var curr = this.head;
+    while (curr) {
+      arr.push(curr.val);
+      curr = curr.next;
+    }
+    console.log(arr);
+  }
+
+  reverse() {
+    if (this.length === 0) return null;
+    if (this.length === 1) return this;
+
+    let currNode = this.head;
+    this.head = this.tail;
+    this.tail = currNode;
+
+    let prev = null;
+    let next;
+
+    for (let i = 0; i < this.length; i++) {
+      next = currNode.next;
+      currNode.next = prev;
+      prev = currNode;
+      currNode = next;
+    }
+
+    return this;
+  }
 }
