@@ -142,12 +142,37 @@ class DoublyLinkedList {
    * @returns true if successful, false otherwise
    */
   set(index, val) {
-    if (index < 0 || index >= this.length) return false;
     let toUpdate = this.get(index);
     if (toUpdate) {
       toUpdate.value = val;
       return true;
     }
     return false;
+  }
+
+  /**
+   * Insert a new node at specified index
+   * @param {*} index the index where to insert
+   * @param {*} val the value of the new node
+   * @returns true if successfull, false otherwise
+   */
+  insert(index, val) {
+    if (index < 0 || index > this.length) return false;
+    //instert at the beginning
+    if (index === 0) return !!this.unshift(val);
+    //insert at the end
+    if (index === this.length) return !!this.push(val);
+    //insert in the middle
+    let centerNode = new Node(val);
+    let rightNode = get(index);
+    let leftNode = rightNode.prev;
+    //need to insert centerNode between leftNode and rightNode
+    centerNode.next = rightNode;
+    centerNode.prev = leftNode;
+    leftNode.next = centerNode;
+    rightNode.prev = rightNode;
+
+    this.length++;
+    return true;
   }
 }
