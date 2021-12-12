@@ -11,6 +11,11 @@ class BinarySearchTree {
     this.root = null;
   }
 
+  /**
+   * Inserts a new node to the tree in the right position
+   * @param {*} val the value of the new node
+   * @returns the updated tree
+   */
   insert(val) {
     const newNode = new Node(val);
     if (!this.root) {
@@ -38,6 +43,19 @@ class BinarySearchTree {
         if (newNode.value === current.value) return undefined;
       }
     }
+  }
+
+  /**
+   * Searches for a value in the tree
+   * @param {*} val the value to search for
+   * @param {*} root the root of the tree
+   * @returns true if the value is found, false otherwise
+   */
+  find(val, root) {
+    if (!root) return false;
+    if (val === root.value) return true;
+    if (val < root.value) return this.find(val, root.left);
+    if (val > root.value) return this.find(val, root.right);
   }
 }
 
