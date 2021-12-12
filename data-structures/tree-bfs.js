@@ -57,12 +57,8 @@ class Tree {
       current = queue.shift();
       visited.push(current.value);
 
-      if (current.left !== null) {
-        queue.push(current.left);
-      }
-      if (current.right !== null) {
-        queue.push(current.right);
-      }
+      if (current.left !== null) queue.push(current.left);
+      if (current.right !== null) queue.push(current.right);
     }
     return visited;
   }
