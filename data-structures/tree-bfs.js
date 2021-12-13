@@ -68,15 +68,47 @@ class Tree {
    * @returns an array containing the visited nodes
    */
   dfsPreOrder() {
-    var visited = [];
+    let visited = [];
 
-    function traverse(node) {
+    const traversePreOrder = (node) => {
       visited.push(node.value);
-      if (node.left) traverse(node.left);
-      if (node.right) traverse(node.right);
-    }
+      if (node.left) traversePreOrder(node.left);
+      if (node.right) traversePreOrder(node.right);
+    };
 
-    traverse(this.root);
+    traversePreOrder(this.root);
+    return visited;
+  }
+
+  /**
+   * Visits the tree with DFS Post Order approach
+   * @returns the array of visited nodes
+   */
+  dfsPostOrder() {
+    let visited = [];
+
+    const traversePostOrder = (node) => {
+      if (node.left) traversePostOrder(node.left);
+      if (node.right) traversePostOrder(node.right);
+      visited.push(node.value);
+    };
+
+    traversePostOrder(this.root);
+    return visited;
+  }
+
+  /**
+   * Visits the tree with DFS In Order approach
+   * @returns the array of visited nodes
+   */
+  dfsInOrder() {
+    let visited = [];
+    const traverseInOrder = (node) => {
+      if (node.left) traverseInOrder(node.left);
+      visited.push(node.value);
+      if (node.right) traverseInOrder(node.right);
+    };
+    traverseInOrder(this.root);
     return visited;
   }
 }
@@ -89,4 +121,4 @@ tree.insert(3);
 tree.insert(8);
 tree.insert(15);
 tree.insert(20);
-console.log(tree.dfsPreOrder());
+console.log(tree.dfsInOrder());
