@@ -22,18 +22,21 @@ class MaxBinaryHeap {
   }
 
   /**
-   * It bubbles up the last inserted element if necessary
+   * Positions the element at the specified index in the right spot
+   * @param {*} arr the array to reorganize
+   * @param {*} index the index of the element to position
+   * @returns the reorganized array
    */
-  bubbleUp = () => {
-    let idx = this.values.length - 1;
-    while (idx > 0) {
-      let parentIdx = Math.floor((idx - 1) / 2);
-      let parent = this.values[parentIdx];
-      if (this.values[idx] <= parent) break;
-      this.swap(this.values, parentIdx, idx);
-      idx = parentIdx;
+  bubbleUp(arr, index) {
+    let parentIndex = 0;
+    while (index > 0) {
+      parentIndex = Math.floor((index - 1) / 2);
+      if (arr[index] <= arr[parentIndex]) break;
+      this.swap(arr, index, parentIndex);
+      index = parentIndex;
     }
-  };
+    return arr;
+  }
 
   /**
    * Adds a new element to the binary heap. The new value bubbles up to the right place
@@ -43,7 +46,39 @@ class MaxBinaryHeap {
    */
   insert(val) {
     this.values.push(val);
-    this.bubbleUp();
+    if (this.values.length > 1) {
+      this.values = this.bubbleUp(this.values, this.values.length - 1);
+    }
+    return this.values;
+  }
+
+  sinkDown() {
+    let idx = 0;
+    const length = this.values.length;
+    const element = this.values[0];
+
+    while (true) {
+      let leftChildIdx = 2 * idx + 1;
+      let rightChildIdx = 2 * idx + 2;
+      let leftChild, rightChild;
+      let swap = null;
+
+      if (leftChildIdx < length) {
+        leftChild = this.values[leftChildIdx];
+      }
+    }
+  }
+
+  removeMax() {
+    //swap first and last element so the root to remove is now at the end of the array
+    this.swap(this.values, 0, this.values.length - 1);
+    //remove the old max from the end of the array
+    let removedNode = this.values.pop();
+
+    //reorganize heap
+    this.sinkDown();
+    //return the removed node
+    return removedNode;
   }
 }
 
@@ -54,3 +89,12 @@ heap.insert(39);
 heap.insert(33);
 heap.insert(18);
 heap.insert(27);
+
+heap.traverse();
+heap.insert(55);
+heap.traverse();
+heap.insert(150);
+heap.traverse();
+
+// heap.removeMax();
+// heap.traverse();
