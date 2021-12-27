@@ -31,8 +31,9 @@ class PriorityQueue {
    * @param {*} j index of the second element
    * @returns the swapped elements
    */
-  swap = (arr, i, j) => ([arr[i], arr[j]] = [arr[j], arr[i]]);
-
+  swap(arr, i, j) {
+    return ([arr[i], arr[j]] = [arr[j], arr[i]]);
+  }
   /**
    * Rearranges the array to keep the min binary heap properties when
    * adding new element
