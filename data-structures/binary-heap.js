@@ -52,33 +52,27 @@ class MaxBinaryHeap {
     return this.values;
   }
 
-  sinkDown() {
-    let idx = 0;
-    const length = this.values.length;
-    const element = this.values[0];
-
-    while (true) {
-      let leftChildIdx = 2 * idx + 1;
-      let rightChildIdx = 2 * idx + 2;
-      let leftChild, rightChild;
-      let swap = null;
-
-      if (leftChildIdx < length) {
-        leftChild = this.values[leftChildIdx];
-      }
+  sinkDown(arr, index) {
+    let childIdx1 = 2 * index + 1;
+    let childIdx2 = 2 * index + 2;
+    let maxChildIdx = arr[childIdx1] > arr[childIdx2] ? childIdx1 : childIdx2;
+    while (childIdx1 < arr.length && childIdx2 < arr.length) {
+      console.log(arr);
+      if (arr[maxChildIdx] <= arr[index]) break;
+      this.swap(arr, index, maxChildIdx);
+      index = maxChildIdx;
+      childIdx1 = 2 * index + 1;
+      childIdx2 = 2 * index + 2;
+      maxChildIdx = arr[childIdx1] > arr[childIdx2] ? childIdx1 : childIdx2;
     }
   }
 
   removeMax() {
-    //swap first and last element so the root to remove is now at the end of the array
+    if (this.values.length < 1) return null;
     this.swap(this.values, 0, this.values.length - 1);
-    //remove the old max from the end of the array
-    let removedNode = this.values.pop();
-
-    //reorganize heap
-    this.sinkDown();
-    //return the removed node
-    return removedNode;
+    removedElem = this.values.pop();
+    this.sinkDown(this.values, 0);
+    return removedElem;
   }
 }
 
@@ -93,8 +87,6 @@ heap.insert(27);
 heap.traverse();
 heap.insert(55);
 heap.traverse();
-heap.insert(150);
-heap.traverse();
 
-// heap.removeMax();
+heap.removeMax();
 // heap.traverse();
