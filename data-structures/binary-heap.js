@@ -52,12 +52,17 @@ class MaxBinaryHeap {
     return this.values;
   }
 
+  /**
+   * Repositions the element at the specified index in the array that
+   * represents a max binary heap, in order to keep the BH properties
+   * @param {*} arr the array of values in the binary heap
+   * @param {*} index the index of the element to reposition
+   */
   sinkDown(arr, index) {
     let childIdx1 = 2 * index + 1;
     let childIdx2 = 2 * index + 2;
     let maxChildIdx = arr[childIdx1] > arr[childIdx2] ? childIdx1 : childIdx2;
     while (childIdx1 < arr.length && childIdx2 < arr.length) {
-      console.log(arr);
       if (arr[maxChildIdx] <= arr[index]) break;
       this.swap(arr, index, maxChildIdx);
       index = maxChildIdx;
@@ -67,6 +72,10 @@ class MaxBinaryHeap {
     }
   }
 
+  /**
+   * Removes the max element from the heap
+   * @returns the removed element
+   */
   removeMax() {
     if (this.values.length < 1) return null;
     this.swap(this.values, 0, this.values.length - 1);
