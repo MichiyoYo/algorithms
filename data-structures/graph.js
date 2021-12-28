@@ -14,6 +14,15 @@ class Graph {
     this.adjacencyList[v2].push(v1);
     return this.adjacencyList;
   }
+
+  removeEdge(v1, v2) {
+    if (!this.adjacencyList[v1] || !this.adjacencyList[v2]) return undefined;
+
+    this.adjacencyList[v1] = this.adjacencyList[v1].filter((v) => v !== v2);
+    this.adjacencyList[v2] = this.adjacencyList[v2].filter((v) => v != v1);
+
+    return this.adjacencyList;
+  }
 }
 
 let graph = new Graph();
