@@ -23,6 +23,16 @@ class Graph {
 
     return this.adjacencyList;
   }
+
+  removeVertex(v) {
+    if (!this.adjacencyList[v]) return undefined;
+    while (this.adjacencyList[v].length > 0) {
+      const adjVertex = this.adjacencyList[v].pop();
+      this.removeEdge(v, adjVertex);
+    }
+    delete this.adjacencyList[v];
+    return this.adjacencyList;
+  }
 }
 
 let graph = new Graph();
