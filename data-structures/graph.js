@@ -33,6 +33,22 @@ class Graph {
     delete this.adjacencyList[v];
     return this.adjacencyList;
   }
+
+  depthFirstRecursive(start) {
+    let result = [];
+    let visited = {};
+    let graph = this.adjacencyList;
+    (function traverse(v) {
+      if (!v) return null;
+      visited[v] = true;
+      result.push(v);
+      let vAdj = graph[v];
+      for (let i = 0; i < vAdj.length; i++) {
+        if (!visited[vAdj[i]]) traverse(vAdj[i]);
+      }
+    })(start);
+    return result;
+  }
 }
 
 let graph = new Graph();
