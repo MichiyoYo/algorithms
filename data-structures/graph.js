@@ -49,6 +49,40 @@ class Graph {
     })(start);
     return result;
   }
+
+  depthFirstIterative(start) {
+    let stack = [start];
+    let result = [];
+    let visited = {};
+    while (stack.length) {
+      let currVertex = stack.pop();
+      if (!visited[currVertex]) {
+        visited[currVertex] = true;
+        result.push(currVertex);
+        const currVertexAjdList = this.adjacencyList[currVertex];
+        currVertexAjdList.forEach((v) => stack.push(v));
+      }
+    }
+    return result;
+  }
+
+  breadthFirst(start) {
+    let results = [];
+    let visited = {};
+    let queue = [start]; // fifo, push to add, shift to remove
+    while (queue.length) {
+      let currVertex = queue.shift();
+      if (!visited[currVertex]) {
+        visited[currVertex] = true;
+        results.push(currVertex);
+        let currVertexAdj = this.adjacencyList[currVertex];
+        currVertexAdj.forEach((v) => {
+          queue.push(v);
+        });
+      }
+    }
+    return results;
+  }
 }
 
 let graph = new Graph();
