@@ -1,4 +1,4 @@
-class Graph {
+class WeightedGraph {
   constructor() {
     this.adjacencyList = {};
   }
@@ -8,81 +8,66 @@ class Graph {
     return this.adjacencyList;
   }
 
-  addEdge(v1, v2) {
+  addEdge(v1, v2, weight) {
     if (!this.adjacencyList[v1] || !this.adjacencyList[v2]) return undefined;
-    this.adjacencyList[v1].push(v2);
-    this.adjacencyList[v2].push(v1);
+    this.adjacencyList[v1].push({ node: v2, weight });
+    this.adjacencyList[v2].push({ node: v1, weight });
     return this.adjacencyList;
   }
 
-  removeEdge(v1, v2) {
-    if (!this.adjacencyList[v1] || !this.adjacencyList[v2]) return undefined;
-
-    this.adjacencyList[v1] = this.adjacencyList[v1].filter((v) => v !== v2);
-    this.adjacencyList[v2] = this.adjacencyList[v2].filter((v) => v != v1);
-
-    return this.adjacencyList;
-  }
-
-  removeVertex(v) {
-    if (!this.adjacencyList[v]) return undefined;
-    while (this.adjacencyList[v].length > 0) {
-      const adjVertex = this.adjacencyList[v].pop();
-      this.removeEdge(v, adjVertex);
+  dijksrtra(start, end) {
+    let priorityQ = new PriorityQueue();
+    let previous = { ...this.adjacencyList };
+    let distances = { ...this.adjacencyList };
+    //initialize distances
+    for (let vtx in distances) {
+      distances[vtx] = Infinity;
     }
-    delete this.adjacencyList[v];
-    return this.adjacencyList;
-  }
-
-  depthFirstRecursive(start) {
-    let result = [];
-    let visited = {};
-    let graph = this.adjacencyList;
-    (function traverse(v) {
-      if (!v) return null;
-      visited[v] = true;
-      result.push(v);
-      let vAdj = graph[v];
-      for (let i = 0; i < vAdj.length; i++) {
-        if (!visited[vAdj[i]]) traverse(vAdj[i]);
-      }
-    })(start);
-    return result;
-  }
-
-  depthFirstIterative(start) {
-    let stack = [start];
-    let result = [];
-    let visited = {};
-    while (stack.length) {
-      let currVertex = stack.pop();
-      if (!visited[currVertex]) {
-        visited[currVertex] = true;
-        result.push(currVertex);
-        const currVertexAjdList = this.adjacencyList[currVertex];
-        currVertexAjdList.forEach((v) => stack.push(v));
-      }
+    distances[start] = 0;
+    //initialize previous
+    for (let vtx in previous) {
+      previous[vtx] = null;
     }
-    return result;
-  }
 
-  breadthFirst(start) {
-    let results = [];
-    let visited = {};
-    let queue = [start]; // fifo, push to add, shift to remove
-    while (queue.length) {
-      let currVertex = queue.shift();
-      if (!visited[currVertex]) {
-        visited[currVertex] = true;
-        results.push(currVertex);
-        let currVertexAdj = this.adjacencyList[currVertex];
-        currVertexAdj.forEach((v) => {
-          queue.push(v);
-        });
-      }
+    for (let vtx in distances) {
+      if (distances[vtx] === Infinity) priorityQ.enqueue(vtx);
     }
-    return results;
+
+    console.log(priorityQ);
   }
 }
 
-let graph = new Graph();
+class PriorityQueue {
+  constructor() {
+    this.values = [];
+  }
+
+  sort() {
+    this.values.sort((a, b) => a.priority - b.priority);
+  }
+
+  enqueue(val, priority) {
+    this.values.push({ val, priority });
+    this.sort();
+  }
+
+  dequeue() {
+    return this.values.shift();
+  }
+}
+
+let graph = new WeightedGraph();
+graph.addVertex("A");
+graph.addVertex("B");
+graph.addVertex("C");
+graph.addVertex("D");
+graph.addVertex("E");
+graph.addVertex("F");
+graph.addEdge("A", "B", 4);
+graph.addEdge("A", "C", 2);
+graph.addEdge("B", "E", 3);
+graph.addEdge("E", "D", 3);
+graph.addEdge("C", "D", 2);
+graph.addEdge("C", "F", 4);
+graph.addEdge("D", "F", 1);
+graph.addEdge("F", "E", 1);
