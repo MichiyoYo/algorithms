@@ -1,3 +1,4 @@
+//Reverse done with divide et impera
 function reverse(str) {
   if (str.length <= 1) return str;
   if (str.length === 2) return ([str[0], str[1]] = [str[1], str[0]].join(""));
