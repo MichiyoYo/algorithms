@@ -7,10 +7,12 @@
 function factorialIterative(n) {
   let result = n;
   for (let i = n - 1; i > 0; i--) {
-    result = result * i;
+    result *= i;
   }
   return result;
 }
+
+console.log("Iterative " + factorialIterative(4));
 
 //recursive solution
 function factorial(n) {
@@ -18,5 +20,5 @@ function factorial(n) {
   return n * factorial(n - 1);
 }
 
-factorial(3);
+console.log("Recursive " + factorial(4));
 //output: 6
