@@ -30,8 +30,14 @@ class HashTable {
 
   get(key) {
     //hashes the key
+    let index = this._hash(key);
+    let value = undefined;
     //retrieve the value associated with key
+    this.keyMap[index].forEach((pair) => {
+      if (pair[0] === key) value = pair[1];
+    });
     //if not in the hash table return undefined
+    return value;
   }
 }
 
