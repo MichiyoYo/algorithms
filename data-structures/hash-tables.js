@@ -33,12 +33,20 @@ class HashTable {
     let index = this._hash(key);
     let value = undefined;
     //retrieve the value associated with key
-    this.keyMap[index].forEach((pair) => {
-      if (pair[0] === key) value = pair[1];
-    });
+    if (this.keyMap[index]) {
+      this.keyMap[index].forEach((pair) => {
+        if (pair[0] === key) value = pair[1];
+      });
+    }
+
     //if not in the hash table return undefined
     return value;
   }
 }
 
-let hashTab = new HashTable(100);
+let hashTab = new HashTable(3);
+hashTab.set("cree", "human");
+hashTab.set("mochi", "cat");
+hashTab.set("joe", "bear");
+hashTab.set("snickers", "dog");
+console.log(hashTab.get("cree"));
