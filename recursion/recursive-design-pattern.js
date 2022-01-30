@@ -1,5 +1,5 @@
 /**
- * This function uses a common design pattern for recursion.
+ * This function uses a common design pattern for recursion,
  * where the result array is declared outside of the recursive function and it is modified by it.
  * The function helper is a closure (a function that is bundled with references to its surrounding state)
  * @param {*} arr
