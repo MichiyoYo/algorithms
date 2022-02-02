@@ -92,7 +92,7 @@ class SinglyLinkedList {
   }
 
   /**
-   * Retrieves a node in position index
+   * Retrieves a node in position index or null if not found
    * @param {*} index the position of the node we want to get
    * @returns the node at that specified index
    */
