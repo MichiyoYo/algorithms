@@ -76,3 +76,5 @@ let m3 = new ListNode(4);
 
 m1.next = m2;
 m2.next = m3;
+
+// this solution is not completely correct
