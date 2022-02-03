@@ -179,6 +179,10 @@ class SinglyLinkedList {
     console.log(arr);
   }
 
+  /**
+   * Reverses a list
+   * @returns the reversed list
+   */
   reverse() {
     if (this.length === 0) return null;
     if (this.length === 1) return this;
