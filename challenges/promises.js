@@ -46,7 +46,8 @@ function hydrateAuthor(post) {
   return new Promise((resolve, reject) => {
     const auth = authors.find((author) => author.name === post.author);
     if (auth) {
-      resolve(auth);
+      post.author = auth;
+      resolve(post);
     } else {
       reject(Error("no authors for this post"));
     }
@@ -54,15 +55,6 @@ function hydrateAuthor(post) {
 }
 
 getPostsById(1)
-  .then((post) => {
-    return [post, hydrateAuthor(post)];
-  })
-  .then(([postData, authorPromise]) => {
-    authorPromise.then((authorData) => {
-      console.log({
-        post: postData.title,
-        author: authorData,
-      });
-    });
-  })
+  .then((postData) => hydrateAuthor(postData))
+  .then((post) => console.log(post))
   .catch((err) => console.error(err));
