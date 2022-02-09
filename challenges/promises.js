@@ -58,3 +58,29 @@ getPostsById(1)
   .then((postData) => hydrateAuthor(postData))
   .then((post) => console.log(post))
   .catch((err) => console.error(err));
+
+/**Example 2 */
+
+/**
+ * Two promises to simulate the response of a query
+ */
+const weather = new Promise((resolve) => {
+  setTimeout(() => {
+    resolve({ temp: 29, conditions: "Sunny with Clouds" });
+  }, 2000);
+});
+
+const tweets = new Promise((resolve) => {
+  setTimeout(() => {
+    resolve(["I like cake", "BBQ is good too!"]);
+  }, 500);
+});
+
+/**
+ * With Promise.all we can wait for multiple promises at the same time
+ *
+ */
+Promise.all([weather, tweets]).then((responses) => {
+  const [weather, tweets] = responses;
+  console.log(weather, tweets);
+});
