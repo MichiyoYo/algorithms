@@ -51,11 +51,30 @@ class BinarySearchTree {
    * @param {*} root the root of the tree
    * @returns true if the value is found, false otherwise
    */
-  find(val, root) {
+  findRecursive(root, val) {
     if (!root) return false;
-    if (val === root.value) return true;
-    if (val < root.value) return this.find(val, root.left);
-    if (val > root.value) return this.find(val, root.right);
+    if (root.val === val) return true;
+    if (val < root.val) return this.findRecursive(root.left, val);
+    if (val > root.val) return this.findRecursive(root.right, val);
+  }
+
+  findIterative(val) {
+    if (!this.root) return false;
+    if (this.root.val === val) return true;
+
+    let currNode = this.root;
+
+    while (true) {
+      if (val < currNode.val) {
+        if (!currNode.left) return false;
+        currNode = currNode.left;
+      }
+      if (val > currNode.val) {
+        if (!currNode.right) return false;
+        currNode = currNode.right;
+      }
+      if (currNode.val === val) return true;
+    }
   }
 }
 
