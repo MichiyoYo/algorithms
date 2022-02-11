@@ -100,6 +100,42 @@ class Tree {
 
     return visited;
   }
+
+  dfsPreOrder() {
+    let visited = [];
+
+    const preOrder = (node) => {
+      visited.push(node.val);
+      if (node.left) preOrder(node.left);
+      if (node.right) preOrder(node.right);
+    };
+    preOrder(this.root);
+    return visited;
+  }
+
+  dfsInOrder() {
+    let visited = [];
+    const inOrder = (node) => {
+      if (node.left) inOrder(node.left);
+      visited.push(node.val);
+      if (node.right) inOrder(node.right);
+    };
+    inOrder(this.root);
+    return visited;
+  }
+
+  dfsPostOrder() {
+    let visited = [];
+
+    const postOrder = (node) => {
+      if (node.left) postOrder(node.left);
+      if (node.right) postOrder(node.right);
+      visited.push(node.val);
+    };
+
+    postOrder(this.root);
+    return visited;
+  }
 }
 
 let t = new Tree();
