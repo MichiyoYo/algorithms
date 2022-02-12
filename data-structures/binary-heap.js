@@ -79,7 +79,7 @@ class MaxBinaryHeap {
   removeMax() {
     if (this.values.length < 1) return null;
     this.swap(this.values, 0, this.values.length - 1);
-    removedElem = this.values.pop();
+    let removedElem = this.values.pop();
     this.sinkDown(this.values, 0);
     return removedElem;
   }
