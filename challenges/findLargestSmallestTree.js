@@ -14,3 +14,19 @@ function findLargestSmallestTree(root, num) {
     return findLargestSmallestTree(root.right, val);
   }
 }
+
+function findLargestSmallerKey(root, num) {
+  let result = -1;
+
+  while (root) {
+    if (root.val < num) {
+      //saving this val because it could be the one
+      result = root.val;
+      //continue search in the right sub tree
+      root = root.right;
+    } else {
+      root = root.left;
+    }
+  }
+  return result;
+}
