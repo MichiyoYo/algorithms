@@ -99,7 +99,15 @@ class PriorityQueue {
     if (this.values.length < 1) return null;
     this.swap(this.values, 0, this.values.length - 1);
     let removed = this.values.pop();
-    this.values = this.sinkDown(this.values, 0);
+    if (
+      this.values.length === 2 &&
+      this.values[0].priority > this.values[1].priority
+    ) {
+      this.swap(this.values, 0, 1);
+    }
+    if (this.values.length > 2) {
+      this.sinkDown(this.values, 0);
+    }
     return removed;
   }
 }
