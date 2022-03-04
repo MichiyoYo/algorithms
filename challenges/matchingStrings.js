@@ -3,6 +3,9 @@ There is a collection of input strings and a collection of query strings. For ea
 */
 
 function matchingStrings(strings, queries) {
+  if (!strings || !queries) return null;
+  if (!strings.length) return null;
+
   // Write your code here
   let map = new Map();
 
